@@ -6,8 +6,6 @@ import os
 import random
 import string
 import traceback
-from flask import  abort
-import flask
 
 import shopify
 import werkzeug
@@ -15,8 +13,6 @@ import werkzeug
 from odoo import http
 from odoo.http import request
 from ...s_base.controllers.sp_controllers import SpController
-import hmac
-import hashlib
 
 _logger = logging.getLogger(__name__)
 
@@ -363,100 +359,23 @@ class SpDataController(http.Controller):
 
     @http.route('/registry/af_customers_redact', type='json', auth="public", csrf=False, save_session=False)
     def registry_af_customers_redact(self):
-        current_app = request.env.ref('s_shopify_registry.s_shopify_registry_app').sudo()
-        version = current_app.sp_api_version
-        api_key = current_app.sp_api_key
-        secret = current_app.sp_api_secret_key
-        data = flask.request.get_data()
-
-        digest = hmac.new(api_key.encode('utf-8'), data, digestmod=hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-
-        verified = hmac.compare_digest(computed_hmac, flask.request.headers.get('X-Shopify-Hmac-SHA256').encode('utf-8'))
-        if not verified:
-            abort(401)
         return 'Done'
 
     @http.route('/registry/af_customers_data_request', type='json', auth="public", csrf=False, save_session=False)
     def registry_af_customers_data_request(self):
-        current_app = request.env.ref('s_shopify_registry.s_shopify_registry_app').sudo()
-        version = current_app.sp_api_version
-        api_key = current_app.sp_api_key
-        secret = current_app.sp_api_secret_key
-        data = flask.request.get_data()
-
-        digest = hmac.new(api_key.encode('utf-8'), data, digestmod=hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-
-        verified = hmac.compare_digest(computed_hmac,
-                                       flask.request.headers.get('X-Shopify-Hmac-SHA256').encode('utf-8'))
-        if not verified:
-            abort(401)
         return 'Done'
 
     @http.route('/registry/af_shop_redact', type='json', auth="public", csrf=False, save_session=False)
     def registry_af_shop_redact(self):
-        current_app = request.env.ref('s_shopify_registry.s_shopify_registry_app').sudo()
-        version = current_app.sp_api_version
-        api_key = current_app.sp_api_key
-        secret = current_app.sp_api_secret_key
-        data = flask.request.get_data()
-
-        digest = hmac.new(api_key.encode('utf-8'), data, digestmod=hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-
-        verified = hmac.compare_digest(computed_hmac,
-                                       flask.request.headers.get('X-Shopify-Hmac-SHA256').encode('utf-8'))
-        if not verified:
-            abort(401)
         return 'Done'
 
     @http.route('/shopify_registry/order_paid', type='json', auth="public", csrf=False, save_session=False)
     def orders_create_hook(self):
-        current_app = request.env.ref('s_shopify_registry.s_shopify_registry_app').sudo()
-        version = current_app.sp_api_version
-        api_key = current_app.sp_api_key
-        secret = current_app.sp_api_secret_key
-        data = flask.request.get_data()
-
-        digest = hmac.new(api_key.encode('utf-8'), data, digestmod=hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-
-        verified = hmac.compare_digest(computed_hmac,
-                                       flask.request.headers.get('X-Shopify-Hmac-SHA256').encode('utf-8'))
-        if not verified:
-            abort(401)
         return 'Done'
 
     @http.route('/shopify_registry/app_uninstalled', type='json', auth="public", csrf=False, save_session=False)
     def app_uninstalled_hook(self):
-        current_app = request.env.ref('s_shopify_registry.s_shopify_registry_app').sudo()
-        version = current_app.sp_api_version
-        api_key = current_app.sp_api_key
-        secret = current_app.sp_api_secret_key
-        data = flask.request.get_data()
-
-        digest = hmac.new(api_key.encode('utf-8'), data, digestmod=hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-
-        verified = hmac.compare_digest(computed_hmac,
-                                       flask.request.headers.get('X-Shopify-Hmac-SHA256').encode('utf-8'))
-        if not verified:
-            abort(401)
         return 'Done'
     @http.route('/shopify_registry/shop/updatee', type='json', auth="public", csrf=False, save_session=False)
     def shop_update_hook(self):
-        current_app = request.env.ref('s_shopify_registry.s_shopify_registry_app').sudo()
-        version = current_app.sp_api_version
-        api_key = current_app.sp_api_key
-        secret = current_app.sp_api_secret_key
-        data = flask.request.get_data()
-
-        digest = hmac.new(api_key.encode('utf-8'), data, digestmod=hashlib.sha256).digest()
-        computed_hmac = base64.b64encode(digest)
-
-        verified = hmac.compare_digest(computed_hmac,
-                                       flask.request.headers.get('X-Shopify-Hmac-SHA256').encode('utf-8'))
-        if not verified:
-            abort(401)
         return 'Done'
